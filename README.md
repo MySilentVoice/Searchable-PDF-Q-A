@@ -5,7 +5,7 @@ Ask questions about research papers using AI. Built with LangChain, ChromaDB, Mi
 1. Install Dependencies
 bash python -m venv venv
 venv\Scripts\activate  # Windows
-# source venv/bin/activate  # macOS/Linux
+source venv/bin/activate  # macOS/Linux
 
 pip install -r requirements.txt
 2. Configure API Key
