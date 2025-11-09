@@ -1,45 +1,78 @@
-📄 PDF Document Q&A (RAG System)
-Ask questions about research papers using AI. Built with LangChain, ChromaDB, MiniLM, and Gemini 2.5 Flash.
+# 📄 PDF Document Q&A (RAG System)
 
-🚀 Quick Start
-1. Install Dependencies
-bash python -m venv venv
-venv\Scripts\activate  # Windows
-source venv/bin/activate  # macOS/Linux
+Ask questions about research papers using AI. Built with **LangChain**, **ChromaDB**, **MiniLM**, and **Gemini 2.5 Flash**.
 
+---
+
+## 🚀 Quick Start
+
+1. **Create & activate a virtual environment** (Python 3.11 recommended)
+
+**Windows (PowerShell)**
+```powershell
+py -3.11 -m venv venv
+.\venv\Scripts\Activate.ps1
+macOS / Linux
+
+bash
+python3.11 -m venv venv
+source venv/bin/activate
+Install dependencies
+
+bash
 pip install -r requirements.txt
-2. Configure API Key
-Create .env file:
-envGOOGLE_API_KEY=your_gemini_api_key_here
-Get your key: Google AI Studio
-3. Add PDFs
-Download and place in pdf_qa_project/ folder:
+Configure API key
 
-Paper 1 → paper1.pdf
-Paper 2 → paper2.pdf
+Create a .env file in the project root:
 
-4. Build Vector Database
-bashpython ingest.py
-5. Run the App
-bash streamlit run app.py
+GOOGLE_API_KEY=your_gemini_api_key_here
+Get the key from Google AI Studio (or the provider you use).
 
-Example questions:
+Add PDFs
+Place your PDF files in the pdf_qa_project/ folder. Example names:
 
+paper1.pdf
+
+paper2.pdf
+
+Build the vector database
+
+bash
+Copy code
+python ingest.py
+Run the Streamlit app
+
+bash
+Copy code
+streamlit run app.py
+❓ Example questions
 "Summarize the key contributions"
+
 "What is Chain-of-Thought faithfulness?"
 
-The app auto-detects mentions like "first paper" or "second paper" in your query.
+The app auto-detects phrases like "first paper" or "second paper" in the query and will try to filter accordingly.
 
-🛠️ Tech Stack
-ComponentPurposeMiniLMFree local embeddingsChromaDBVector databaseGemini 2.5 FlashAnswer generationLangChainRAG orchestrationStreamlitWeb interface
+🧰 Tech Stack
+Embeddings: MiniLM (local via sentence-transformers)
 
-📊 Features
+Vector DB: ChromaDB (persisted locally)
 
+LLM: Gemini 2.5 Flash (via Google Generative API)
+
+Orchestration: LangChain-style retrieval + RAG chain
+
+Frontend: Streamlit
+
+✅ Features
 ✅ Semantic search across PDFs
-✅ Shows source chunks used
+
+✅ Shows source chunks used by the chain
+
 ✅ Query response time tracking
-✅ Smart document filtering
-✅ Local embeddings (no extra API costs)
 
+✅ Smart document filtering (heuristic)
 
-Author: Manish Rawat | Task: Searchable PDF Q&A
+✅ Local embeddings (no extra API costs for embeddings)
+
+Author: Manish Rawat
+Task: Searchable PDF Q&A
