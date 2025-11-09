@@ -1,0 +1,48 @@
+# --------------------------------------
+# Core Environment for PDF Q&A (RAG) App
+# Using: Streamlit + LangChain + Chroma + Gemini + HuggingFace
+# Compatible with Python 3.10–3.12
+# --------------------------------------
+
+# --- Core app dependencies ---
+streamlit>=1.37.0
+python-dotenv>=1.0.1
+
+# --- LangChain ecosystem ---
+# Use the new modular packages instead of the old monolith
+langchain>=0.2.10
+langchain-core>=0.2.25
+langchain-community>=0.2.10
+langchain-huggingface>=0.1.2
+langchain-google-genai>=1.0.3
+langchain-chroma>=0.1.4
+langchain-text-splitters>=0.2.2
+langchain-classic>=0.0.8   # classic backward-compatible chain types
+
+# --- Vector storage ---
+chromadb>=0.5.3
+
+# --- PDF loading & parsing ---
+pypdf>=4.2.0
+
+# --- Hugging Face for embeddings ---
+sentence-transformers>=2.7.0
+transformers>=4.44.0
+torch>=2.3.0
+
+# --- Google Gemini / Vertex AI integration ---
+google-generativeai>=0.7.2
+google-api-core>=2.19.0
+
+# --- Utility & system helpers ---
+tqdm>=4.66.5
+numpy>=1.26.4
+pandas>=2.2.2
+
+# --- Optional debugging & dev tools ---
+requests>=2.32.3
+rich>=13.7.1
+
+# --- Prevent known dependency conflicts ---
+protobuf>=5.27.2
+typing-extensions>=4.12.2
