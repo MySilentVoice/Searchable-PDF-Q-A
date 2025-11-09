@@ -1,4 +1,4 @@
-# app.py - Optimized Streamlit RAG app with doc selector + auto-detect
+# app.py - Optimized Streamlit RAG app (no doc selector)
 # MiniLM (local embeddings) + Chroma (local) + Gemini 2.5 Flash (generation)
 import os
 import time
@@ -186,18 +186,11 @@ base_retriever = state["retriever"]
 llm = state["llm"]
 qa_pipeline = state["qa_chain"]
 
-# Try to infer document names present in DB metadata; if not possible, fall back to expected names
-def guess_doc_names(vectorstore):
-    defaults = ["All", "paper1.pdf", "paper2.pdf"]
-    # Some vectorstore wrappers may expose collection names or metadata - ignoring for compatibility
-    return defaults
-
-doc_names = guess_doc_names(vectorstore)
-selected_source = st.selectbox("Select document to query", doc_names, index=0)
-
 # User input
-user_query = st.text_input("Ask a question about the documents:",
-                           placeholder="e.g., What does the first paper say about energy efficiency?")
+user_query = st.text_input(
+    "Ask a question about the documents:",
+    placeholder="e.g., What does the first paper say about energy efficiency?"
+)
 
 if not user_query:
     st.info("Enter a question to query the documents.")
@@ -206,16 +199,13 @@ if not user_query:
 # Auto-detect "first paper" / "second paper" mentions in the query (heuristic)
 q_lower = user_query.lower()
 auto_filter = None
-if "first paper" in q_lower or "first paper" in user_query.lower() or "paper 1" in q_lower or "paper1" in q_lower:
+if "first paper" in q_lower or "paper 1" in q_lower or "paper1" in q_lower:
     auto_filter = "paper1.pdf"
 elif "second paper" in q_lower or "paper 2" in q_lower or "paper2" in q_lower:
     auto_filter = "paper2.pdf"
 
-# If user selected a specific source in dropdown, that takes precedence unless user asked explicitly 'first/second'
-if selected_source != "All" and auto_filter is None:
-    filter_source = selected_source
-else:
-    filter_source = auto_filter if auto_filter is not None else (None if selected_source == "All" else selected_source)
+# Without a selector, filter_source is driven only by auto-detect; default => search all docs
+filter_source = auto_filter if auto_filter is not None else None
 
 # Perform retrieval (with fallback) to estimate context size and possibly adjust k
 k_to_use = DEFAULT_K
