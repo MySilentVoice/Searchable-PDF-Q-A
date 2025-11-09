@@ -23,16 +23,6 @@ bashpython ingest.py
 5. Run the App
 bash streamlit run app.py
 
-📁 Project Structure
-PYTHON PROJECT/
-├── app.py              # Streamlit interface
-├── ingest.py          # Vector DB creation
-├── requirements.txt   # Dependencies
-├── .env              # API keys
-├── chroma_db/        # Vector database (generated)
-├── pdf_qa_project/   # Your PDFs go here
-└── venv/             # Virtual environment
-
 Example questions:
 
 "Summarize the key contributions"
