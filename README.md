@@ -38,13 +38,12 @@ paper2.pdf
 Build the vector database
 
 bash
-Copy code
 python ingest.py
-Run the Streamlit app
 
+Run the Streamlit app
 bash
-Copy code
 streamlit run app.py
+
 ❓ Example questions
 "Summarize the key contributions"
 
